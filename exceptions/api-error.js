@@ -17,4 +17,8 @@ module.exports = class ApiError extends Error {
         return new ApiError(400, message, errors);
     }
 
+    static RightError() {
+        throw new ApiError(403, 'NOT_ENOUGH_RIGHTS');
+    }
+
 }
