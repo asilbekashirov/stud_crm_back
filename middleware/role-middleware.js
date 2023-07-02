@@ -14,7 +14,7 @@ module.exports = function(roles) {
                 return res.status(401).json({message: "USER_NOT_AUTHORIZED"})
             }
 
-            const {roles: userRoles} = jwt.verify(token, secret)
+            const {roles: userRoles} = jwt.verify(token, process.env.JWT_ACCESS_SECRET)
 
             // let hasRole = false
             // userRoles.forEach(role => {
