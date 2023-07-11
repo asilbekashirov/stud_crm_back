@@ -16,6 +16,28 @@ class UserController {
             next(e)
         }
     }
+    async updateUser(req, res, next) {
+        try {
+            const {id} = req.params
+
+            const user = await userService.update(id, req.body)
+
+            return res.json(user)
+
+        } catch (error) {
+            next(error)
+        }
+    }
+    async deleteUser(req, res, next) {
+        try {
+            const {id} = req.params
+
+            return res.json({message: "User deleted"})
+
+        } catch (error) {
+            next(error)
+        }
+    }
     async login(req, res, next) {
         try {
             const {email, password} = req.body

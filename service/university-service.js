@@ -17,13 +17,39 @@ class UniversityService {
 
         return {universityDto}
     }
-    async delete(props) {
-        const {id} = props
 
+    async findById(id) {
+        const university = await universityModel.find({_id: id})
+
+        if (!university) {
+            throw new ApiError.BadRequest("UNIVERSITY_NOT_FOUND")
+        }
+
+        const universityDto = new UniversityDto(university)
+
+        return {university: universityDto}
+    }
+
+    async delete(id) {
         await universityModel.findByIdAndDelete({_id: id})
     }
-    async update(props) {
-        const {} = props
+
+    async update(id, rest) {
+
+        let university = await universityModel.find({_id: id})
+
+        if (!university) {
+            throw ApiError.BadRequest("UNIVERSITY_NOT_FOUND")
+        }
+
+        university = Object.assign({}, rest)
+
+        await university.save()
+
+        const universityDto = new UniversityDto(university)
+
+        return {university: universityDto}
+
     }
 }
 

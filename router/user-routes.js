@@ -13,5 +13,7 @@ router.post(
 router.post("/login", userController.login);
 router.get("/activate/:link", userController.activate);
 router.get("/users", authMiddleware, userController.getUsers);
+router.put("/user/:id/update", authMiddleware, userController.updateUser)
+router.delete("/user/:id/delete", authMiddleware, userController.deleteUser)
 
 module.exports = router;

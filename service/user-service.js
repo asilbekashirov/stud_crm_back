@@ -31,6 +31,22 @@ class UserService {
 
     }
 
+    async update(id, rest) {
+        let user = await UserModel.findOne({_id: id})
+        if (!user) {
+            throw ApiError.BadRequest('Пользователь не найден')
+        }
+        user = Object.assign({}, rest)
+        await user.save()
+        const userDto = new UserDto(user)
+
+        return {user: userDto}
+    }
+
+    async delete(id) {
+        await UserModel.findByIdAndDelete({_id: id})
+    }
+
     async activate(activationLink) {
         const user = await UserModel.findOne({activationLink})
         if (!user) {

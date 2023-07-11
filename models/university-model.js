@@ -7,8 +7,6 @@ const UniversitySchema = new Schema({
     foundIn: {type: Date},
     country: {type: String, required: true},
     city: {type: String, required: true},
-    active: {type: Boolean, default: false},
-    tuitionFee: {type: Number, default: 0},
     descriptionRu: {type: String},
     descriptionEn: {type: String},
     descriptionUz: {type: String},
