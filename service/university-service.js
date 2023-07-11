@@ -42,7 +42,7 @@ class UniversityService {
             throw ApiError.BadRequest("UNIVERSITY_NOT_FOUND")
         }
 
-        university = Object.assign({}, rest)
+        university = {...university, ...rest}
 
         await university.save()
 

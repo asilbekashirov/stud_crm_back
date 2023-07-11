@@ -36,7 +36,7 @@ class UserService {
         if (!user) {
             throw ApiError.BadRequest('Пользователь не найден')
         }
-        user = Object.assign({}, rest)
+        user = {...user, ...rest}
         await user.save()
         const userDto = new UserDto(user)
 
