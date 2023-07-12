@@ -44,7 +44,12 @@ class UserService {
     }
 
     async delete(id) {
-        await UserModel.findByIdAndDelete(id)
+        const deleteduser = await UserModel.findByIdAndDelete(id)
+
+        if (!deleteduser) {
+            throw ApiError.BadRequest('USER_NOT_FOUND')
+        }
+
     }
 
     async activate(activationLink) {

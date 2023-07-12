@@ -31,7 +31,12 @@ class UniversityService {
     }
 
     async delete(id) {
-        await universityModel.findByIdAndDelete(id)
+        const deletedUni = await universityModel.findByIdAndDelete(id)
+
+        if (!deletedUni) {
+            throw new ApiError.BadRequest("UNIVERSITY_NOT_FOUND")
+        }
+
     }
 
     async update(id, rest) {
