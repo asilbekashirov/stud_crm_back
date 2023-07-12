@@ -44,7 +44,7 @@ class UserService {
     }
 
     async delete(id) {
-        await UserModel.findByIdAndDelete({_id: id})
+        await UserModel.findByIdAndDelete(id)
     }
 
     async activate(activationLink) {

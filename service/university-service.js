@@ -31,7 +31,7 @@ class UniversityService {
     }
 
     async delete(id) {
-        await universityModel.findByIdAndDelete({_id: id})
+        await universityModel.findByIdAndDelete(id)
     }
 
     async update(id, rest) {
