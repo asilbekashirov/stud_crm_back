@@ -1,11 +1,7 @@
 module.exports = class UniversityDto {
   id;
-  nameRu;
-  nameEn;
-  nameUz;
-  descriptionRu;
-  descriptionEn;
-  descriptionUz;
+  name = {};
+  description = {};
   country;
   city;
   active;
@@ -15,12 +11,17 @@ module.exports = class UniversityDto {
 
   constructor(model) {
     this.id = model.id;
-    this.nameRu = model.nameRu;
-    this.nameEn = model.nameEn;
+    this.name = {
+      uz: model.name.uz,
+      ru: model.name.ru,
+      en: model.name.en
+    }
     this.nameUz = model.nameUz;
-    this.descriptionRu = model.descriptionRu;
-    this.descriptionEn = model.descriptionEn;
-    this.descriptionUz = model.descriptionUz;
+    this.description = {
+      uz: model.description.uz,
+      ru: model.description.ru,
+      en: model.description.en
+    }
     this.country = model.country;
     this.city = model.city;
     this.active = model.active;
