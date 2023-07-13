@@ -11,6 +11,7 @@ module.exports = class UniversityDto {
   active;
   foundIn;
   tuitionFee;
+  image;
 
   constructor(model) {
     this.id = model.id;
@@ -25,5 +26,6 @@ module.exports = class UniversityDto {
     this.active = model.active;
     this.foundIn = model.foundIn;
     this.tuitionFee = model.tuitionFee;
+    this.image = model.image;
   }
 };

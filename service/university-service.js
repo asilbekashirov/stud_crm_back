@@ -3,19 +3,23 @@ const ApiError = require('../exceptions/api-error')
 const UniversityDto = require("../dtos/university-dto")
 
 class UniversityService {
-    async create(props) {
-        const {name} = props
+    async create(data, image) {
+        const {nameEn} = data
 
-        const university = await universityModel.find({name})
+        console.log(data);
+
+        const university = await universityModel.findOne({nameEn})
 
         if (university) {
             throw ApiError.BadRequest("UNIVERSITY_ALREADY_REGISTERED")
         }
 
-        const newUniversity = universityModel.create(university)
+        const universityImagePath = '/media/' + image?.filename
+
+        const newUniversity = await universityModel.create({...data, image: !!image ? universityImagePath : ""})
         const universityDto = new UniversityDto(newUniversity)
 
-        return {universityDto}
+        return {university: universityDto}
     }
 
     async findById(id) {
@@ -37,6 +41,10 @@ class UniversityService {
             throw new ApiError.BadRequest("UNIVERSITY_NOT_FOUND")
         }
 
+    }
+
+    async getUniversities() {
+        return await universityModel.find()
     }
 
     async update(id, rest) {

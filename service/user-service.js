@@ -43,6 +43,18 @@ class UserService {
         return {user: userDto}
     }
 
+    async updatePassword(id, newPassword) {
+        const user = await UserModel.findOne({_id: id})
+
+        const newHashedPassword = await bcrypt.hash(newPassword, 3)
+        user.password = newHashedPassword
+        await user.save()
+
+        const userDto = new UserDto(user)
+        return {user: userDto}
+
+    }
+
     async delete(id) {
         const deleteduser = await UserModel.findByIdAndDelete(id)
 

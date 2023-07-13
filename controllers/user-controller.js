@@ -28,6 +28,15 @@ class UserController {
             next(error)
         }
     }
+    async updatePassword(req, res, next) {
+        try {
+            const {id} = req.params
+            const user = await userService.updatePassword(id, req.body)
+            res.json(user)
+        } catch (error) {
+            next(error)
+        }
+    }
     async deleteUser(req, res, next) {
         try {
             const {id} = req.params

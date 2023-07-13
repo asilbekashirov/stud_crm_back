@@ -1,13 +1,28 @@
+const ApiError = require('../exceptions/api-error');
 const universityService = require('../service/university-service')
 const {validationResult} = require('express-validator');
 
 class UniversityController {
     async createUniversity(req, res, next) {
         try {
-            const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                return next(ApiError.BadRequest('VALIDATION_ERROR', errors.array()))
-            }
+            // const errors = validationResult(req)
+            // if (!errors.isEmpty()) {
+            //     return next(ApiError.BadRequest('VALIDATION_ERROR', errors.array()))
+            // }
+            console.log(req.file);
+            const university = await universityService.create(req.body, req.file)
+
+            return res.json(university)
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    async getUniversities(req, res, next) {
+        try {
+            const universities = await universityService.getUniversities()
+
+            return res.json(universities)
         } catch (error) {
             next(error);
         }
@@ -29,7 +44,7 @@ class UniversityController {
         try {
             const {id} = req.params
 
-            const university = await universityService.findById({id})
+            const university = await universityService.findById(id)
 
             return res.json(university);
         } catch (error) {

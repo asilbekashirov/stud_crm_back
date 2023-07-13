@@ -14,7 +14,7 @@ module.exports = function(roles) {
                 return res.status(401).json({message: "USER_NOT_AUTHORIZED"})
             }
 
-            const {roles: userRoles} = jwt.verify(token, process.env.JWT_ACCESS_SECRET)
+            const {role: userRoles} = jwt.verify(token, process.env.JWT_ACCESS_SECRET)
 
             // let hasRole = false
             // userRoles.forEach(role => {
@@ -22,7 +22,7 @@ module.exports = function(roles) {
             //         hasRole = true
             //     }
             // })
-            const hasRole = userRoles.some(role => roles.includes(role))
+            const hasRole = roles.some(role => role === userRoles)
             if (!hasRole) {
                 return res.status(403).json({message: "NOT_ENOUGH_RIGHTS"})
             }
