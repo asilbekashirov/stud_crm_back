@@ -4,11 +4,8 @@ const UniversityDto = require("../dtos/university-dto")
 
 class UniversityService {
     async create(data, image) {
-        const {nameEn} = data
 
-        console.log(data);
-
-        const university = await universityModel.findOne({nameEn})
+        const university = await universityModel.findOne({"name.en": data['name.en']})
 
         if (university) {
             throw ApiError.BadRequest("UNIVERSITY_ALREADY_REGISTERED")
