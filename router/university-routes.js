@@ -16,6 +16,7 @@ router.post(
 //   body("nameEn").notEmpty(),
   universityController.createUniversity
 );
+router.get("/get/:id", universityController.findUniversityById)
 router.get("/list", universityController.getUniversities);
 router.put("/:id/update", [authMiddleware, roleMiddleware(["admin"])], universityController.updateUniversity)
 router.delete("/:id/delete", [authMiddleware, roleMiddleware(["admin"])], universityController.deleteUniversity)

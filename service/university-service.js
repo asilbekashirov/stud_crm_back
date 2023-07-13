@@ -20,7 +20,7 @@ class UniversityService {
     }
 
     async findById(id) {
-        const university = await universityModel.find({_id: id})
+        const university = await universityModel.findOne({_id: id})
 
         if (!university) {
             throw new ApiError.BadRequest("UNIVERSITY_NOT_FOUND")
