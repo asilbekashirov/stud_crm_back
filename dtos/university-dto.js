@@ -8,6 +8,8 @@ module.exports = class UniversityDto {
   foundIn;
   tuitionFee;
   image;
+  createdAt;
+  updatedAt;
 
   constructor(model) {
     this.id = model.id;
@@ -28,5 +30,7 @@ module.exports = class UniversityDto {
     this.foundIn = model.foundIn;
     this.tuitionFee = model.tuitionFee;
     this.image = model.image;
+    this.createdAt = model.createdAt;
+    this.updatedAt = model.updatedAt;
   }
 };
