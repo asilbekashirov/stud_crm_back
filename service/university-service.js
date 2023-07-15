@@ -63,7 +63,10 @@ class UniversityService {
   }
 
   async findById(id) {
-    const university = await universityModel.findOne({ _id: id });
+    const university = await universityModel.findOne({ _id: id })
+        .populate({path: 'bachelors'})
+        .populate({path: 'masters'})
+        .populate({ path: 'phd'});
 
     if (!university) {
       throw new ApiError.BadRequest("UNIVERSITY_NOT_FOUND");
@@ -83,9 +86,10 @@ class UniversityService {
   }
 
   async getUniversities() {
-    return await universityModel.find().populate({
-        path: 'bachelors',
-    });
+    return await universityModel.find()
+        .populate({path: 'bachelors'})
+        .populate({path: 'masters'})
+        .populate({ path: 'phd'})
   }
 
   async update(id, rest) {
