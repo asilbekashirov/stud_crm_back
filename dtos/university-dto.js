@@ -4,12 +4,13 @@ module.exports = class UniversityDto {
   description = {};
   country;
   city;
-  active;
   foundIn;
-  tuitionFee;
   image;
   createdAt;
   updatedAt;
+  bachelors;
+  masters;
+  phd;
 
   constructor(model) {
     this.id = model.id;
@@ -26,11 +27,12 @@ module.exports = class UniversityDto {
     }
     this.country = model.country;
     this.city = model.city;
-    this.active = model.active;
     this.foundIn = model.foundIn;
-    this.tuitionFee = model.tuitionFee;
     this.image = model.image;
     this.createdAt = model.createdAt;
     this.updatedAt = model.updatedAt;
+    this.bachelors = model.bachelors;
+    this.masters = model.masters;
+    this.phd = model.phd;
   }
 };
