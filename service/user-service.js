@@ -25,16 +25,16 @@ class UserService {
         // await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
 
         const userDto = new UserDto(user)
-        const token = tokenService.generateToken({...userDto})
+        const tokens = tokenService.generateToken({...userDto})
 
-        return {...token, user: userDto}
+        return {...tokens, user: userDto}
 
     }
 
     async update(id, rest) {
         let user = await UserModel.findOne({_id: id})
         if (!user) {
-            throw ApiError.BadRequest('Пользователь не найден')
+            throw ApiError.BadRequest('USER_NOT_FOUND')
         }
         user = {...user, ...rest}
         await user.save()
@@ -76,11 +76,11 @@ class UserService {
     async login(email, password) {
         const user = await UserModel.findOne({email})
         if (!user) {
-            throw ApiError.BadRequest('Пользователь не найден')
+            throw ApiError.BadRequest('AUTH_ERROR')
         }
         const isPassEquals = await bcrypt.compare(password, user.password)
         if (!isPassEquals) {
-            throw ApiError.BadRequest('Некорректный пароль')
+            throw ApiError.BadRequest('AUTH_ERROR')
         }
         const userDto = new UserDto(user)
         const tokens = tokenService.generateToken({...userDto})
