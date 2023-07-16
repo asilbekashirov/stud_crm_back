@@ -60,7 +60,7 @@ class UniversityService {
   }
 
   async findById(id) {
-    const university = await universityModel.findOne({ _id: id })
+    const university = await universityModel.findById(id)
         .populate({path: 'bachelors'})
         .populate({path: 'masters'})
         .populate({ path: 'phd'});

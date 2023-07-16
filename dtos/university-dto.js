@@ -1,5 +1,5 @@
 module.exports = class UniversityDto {
-  id;
+  _id;
   name = {};
   description = {};
   country;
@@ -13,7 +13,7 @@ module.exports = class UniversityDto {
   phd;
 
   constructor(model) {
-    this.id = model.id;
+    this._id = model.id;
     this.name = {
       uz: model.name.uz,
       ru: model.name.ru,
