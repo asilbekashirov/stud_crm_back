@@ -5,6 +5,7 @@ const courseModel = require("../models/course-model");
 
 class UniversityService {
   async create(data, image) {
+
     const university = await universityModel.findOne({
       "name.en": data["name.en"],
     });
@@ -18,7 +19,6 @@ class UniversityService {
     data.image = !!image ? universityImagePath : "";
 
     const baseUniversity = Object.assign({}, data);
-    // baseUniversity.image = !!image ? universityImagePath : ""
 
     delete baseUniversity.bachelors;
     delete baseUniversity.masters;
@@ -30,13 +30,13 @@ class UniversityService {
 
     const coursesArray = [
       {
-        bachelors: data.bachelors,
+        bachelors: JSON.parse(data.bachelors),
       },
       {
-        masters: data.masters,
+        masters: JSON.parse(data.masters),
       },
       {
-        phd: data.phd,
+        phd: JSON.parse(data.phd),
       },
     ];
 
@@ -54,9 +54,6 @@ class UniversityService {
         }
     }
 
-    // const newUniversity = await new universityModel(data).save()
-    // const savedUniversity = await newUniversity
-    // console.log(newUniversity);
     const universityDto = new UniversityDto(newUniversity);
 
     return { university: universityDto };

@@ -12,7 +12,8 @@ const upload = multer({storage})
 
 router.post(
   "/create",
-  [upload.single("image"), authMiddleware, roleMiddleware(["admin"])],
+  upload.single("image"),
+  [authMiddleware, roleMiddleware(["admin"])],
 //   body("nameEn").notEmpty(),
   universityController.createUniversity
 );

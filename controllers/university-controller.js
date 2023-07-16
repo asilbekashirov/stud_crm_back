@@ -9,6 +9,7 @@ class UniversityController {
             // if (!errors.isEmpty()) {
             //     return next(ApiError.BadRequest('VALIDATION_ERROR', errors.array()))
             // }
+            // console.log(req.file);
             const university = await universityService.create(req.body, req.file)
 
             return res.json(university)
