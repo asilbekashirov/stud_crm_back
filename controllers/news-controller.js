@@ -22,7 +22,9 @@ class NewsController {
 
     async getAllNews(req, res, next) {
         try {
-            
+            const allNews = await newsService.getAll()
+
+            return res.json(allNews)
         } catch (error) {
             next(error)
         }
