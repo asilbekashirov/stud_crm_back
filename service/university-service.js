@@ -14,7 +14,7 @@ class UniversityService {
       throw ApiError.BadRequest("UNIVERSITY_ALREADY_REGISTERED");
     }
 
-    const universityImagePath = "/media/" + image?.filename;
+    const universityImagePath = "/media/university/" + image?.filename;
 
     data.image = !!image ? universityImagePath : "";
 

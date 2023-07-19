@@ -4,8 +4,9 @@ const newsController = require("../controllers/news-controller");
 const Router = require("express").Router;
 const router = new Router();
 const multer = require("multer");
+const uploadStorage = require('../utils/file-extension')
 
-const upload = multer();
+const upload = multer({storage: uploadStorage("news")});
 
 router.post(
   "/create",

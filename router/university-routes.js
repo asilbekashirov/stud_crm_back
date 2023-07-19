@@ -5,10 +5,10 @@ const authMiddleware = require("../middleware/auth-middleware");
 const roleMiddleware = require("../middleware/role-middleware");
 const router = new Router();
 const multer = require("multer");
-const storage = require('../utils/file-extension')
+const uploadStorage = require('../utils/file-extension')
 
 
-const upload = multer({storage})
+const upload = multer({storage: uploadStorage("university")})
 
 router.post(
   "/create",

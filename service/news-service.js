@@ -5,6 +5,10 @@ class NewsService {
 
     async create(data, image) {
 
+        // assign image path to new record
+        const newsImagePath = "/media/news" + image?.filename;
+        data.image = !!image ? newsImagePath : "";
+
         const newNews = new newsModel(data)
 
         // await newNews.save()
