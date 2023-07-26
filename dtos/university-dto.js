@@ -1,7 +1,15 @@
 module.exports = class UniversityDto {
   _id;
-  name = {};
-  description = {};
+  name = {
+    en: "",
+    ru: "",
+    uz: "",
+  };
+  description = {
+    en: "",
+    ru: "",
+    uz: "",
+  };
   country;
   city;
   foundIn;
@@ -17,14 +25,14 @@ module.exports = class UniversityDto {
     this.name = {
       uz: model.name.uz,
       ru: model.name.ru,
-      en: model.name.en
-    }
+      en: model.name.en,
+    };
     this.nameUz = model.nameUz;
     this.description = {
       uz: model.description.uz,
       ru: model.description.ru,
-      en: model.description.en
-    }
+      en: model.description.en,
+    };
     this.country = model.country;
     this.city = model.city;
     this.foundIn = model.foundIn;

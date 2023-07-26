@@ -1,14 +1,35 @@
 module.exports = class CourseDto {
     id;
-    name = {}
-    description = {}
+    name = {
+      en: "",
+      ru: "",
+      uz: ""
+    }
+    description = {
+      en: "",
+      ru: "",
+      uz: ""
+    }
     active
     tuitionFee
     semesters
-    intake = {}
+    intake = {
+      fall: false,
+      spring: false,
+    }
+    educationType = {
+      fullTime: false,
+      partTime: false,
+    }
+    languages = []
   
     constructor(model) {
       this.id = model.id;
+      this.educationType = {
+        fullTime: model.educationType.fullTime,
+        partTime: model.educationType.partTime
+      },
+      this.languages = model.languages
       this.name = {
         en: model.name.en,
         ru: model.name.ru,

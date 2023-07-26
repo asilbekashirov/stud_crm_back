@@ -1,8 +1,8 @@
 module.exports = class NewsDto {
     name = {
-        en,
-        ru,
-        uz
+        en: "",
+        ru: "",
+        uz: ""
     }
     image
     _id

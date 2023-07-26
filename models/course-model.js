@@ -13,6 +13,11 @@ const CourseModel = new Schema(
       uz: { type: String, required: true },
     },
     active: { type: Boolean },
+    languages: [{type: String, required: true}],
+    educationType: {
+      fullTime: {type: Boolean},
+      partTime: {type: Boolean},
+    },
     tuitionFee: { type: String },
     semesters: { type: Number },
     intake: {
