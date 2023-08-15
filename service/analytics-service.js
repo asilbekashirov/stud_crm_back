@@ -1,3 +1,4 @@
+const countryModel = require('../models/country-model');
 const universityModel = require('../models/university-model');
 const userModel = require('../models/user-model');
 
@@ -6,7 +7,9 @@ class AnalyticsService {
         const totalUsers = await userModel.countDocuments({ role: "user" })
         const totalUniversities = await universityModel.countDocuments()
 
-        return {totalUsers, totalUniversities}
+        const countriesAndCounts = await countryModel.find()
+
+        return {totalUsers, totalUniversities, countriesAndCounts}
     }
 }
 

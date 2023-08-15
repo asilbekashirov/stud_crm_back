@@ -2,20 +2,21 @@ const universityModel = require("../models/university-model");
 const ApiError = require("../exceptions/api-error");
 const UniversityDto = require("../dtos/university-dto");
 const courseModel = require("../models/course-model");
+const countryModel = require("../models/country-model");
 
 class UniversityService {
   async create(data, image) {
 
+    // check if university already exists
     const university = await universityModel.findOne({
       "name.en": data["name.en"],
     });
-
     if (university) {
       throw ApiError.BadRequest("UNIVERSITY_ALREADY_REGISTERED");
     }
 
+    // assign image path to university
     const universityImagePath = "/media/university/" + image?.filename;
-
     data.image = !!image ? universityImagePath : "";
 
     const baseUniversity = Object.assign({}, data);
@@ -23,21 +24,31 @@ class UniversityService {
     delete baseUniversity.bachelors;
     delete baseUniversity.masters;
     delete baseUniversity.phd;
-
+    
+    // save record
     const newUniversity = new universityModel(baseUniversity);
-
     await newUniversity.save();
 
+    // normalize country name, so it starts with capital letter
+    const countryStandard = `${data["country"].at(0).toUpperCase()}${data["country"].substring(1).toLowerCase()}`;
+    // update countries and count of universities
+    const foundCountry = await countryModel.findOne({country: countryStandard})
+    if (foundCountry) {
+      // increment count
+      foundCountry.universities += 1;
+      await foundCountry.save();
+    } else {
+      const newCountry = new countryModel({
+        country: countryStandard,
+        universities: 1,
+      });
+      await newCountry.save();
+    }
+
     const coursesArray = [
-      {
-        bachelors: JSON.parse(data.bachelors),
-      },
-      {
-        masters: JSON.parse(data.masters),
-      },
-      {
-        phd: JSON.parse(data.phd),
-      },
+      { bachelors: JSON.parse(data.bachelors) },
+      { masters: JSON.parse(data.masters) },
+      { phd: JSON.parse(data.phd) },
     ];
 
     for (const course of coursesArray) {
@@ -46,8 +57,6 @@ class UniversityService {
                 courseItem.university = newUniversity._id; 
                 const newCourse = new courseModel(courseItem);
                 await newCourse.save();
-                console.log(key)
-                console.log(newCourse);
                 newUniversity[key].push(newCourse)
                 await newUniversity.save()
             }
