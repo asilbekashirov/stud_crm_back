@@ -7,7 +7,7 @@ const router = new Router();
 router.get(
   "/analyze",
   [authMiddleware, roleMiddleware(["admin"])],
-  analyticsController.getAnalytics()
+  analyticsController.getAnalytics
 );
 
 module.exports = router;
