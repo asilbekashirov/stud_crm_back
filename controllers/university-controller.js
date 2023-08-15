@@ -12,7 +12,7 @@ class UniversityController {
             // console.log(req.file);
             const university = await universityService.create(req.body, req.file)
 
-            return res.json(university)
+            return res.status(201).json(university)
         } catch (error) {
             next(error);
         }

@@ -6,7 +6,7 @@ class NewsController {
             
             const createdNews = await newsService.create(req.body, req.file)
 
-            return res.json(createdNews)
+            return res.status(201).json(createdNews)
         } catch (error) {
             next(error)
         }
