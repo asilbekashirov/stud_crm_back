@@ -29,7 +29,7 @@ const checkFolders = () => {
 
   fs.mkdirSync("./media");
 
-  const folders = ["users", "universities"];
+  const folders = ["users", "university"];
 
   folders.forEach(name => {
     if (!fs.existsSync(`./media/${name}`)) {
