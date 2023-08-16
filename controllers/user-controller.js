@@ -17,6 +17,17 @@ class UserController {
         }
     }
 
+    async getUserProfile(req, res, next) {
+        try {
+            const {id} = req.params
+            const user = await userService.getProfile(id)
+            return res.status(200).json(user)
+        } catch (error) {
+            console.log(error);
+            next(error)
+        }
+    }
+
     async removeUniversity(req, res, next) {
         try {
             const {id, universities} = req.body

@@ -20,6 +20,15 @@ class UserService {
         return {user: new UserDto(user)}
     }
 
+    async getProfile(id) {
+        const user = await UserModel.findOne({_id: id})
+        if (!user) {
+            throw ApiError.BadRequest('USER_NOT_FOUND')
+        }
+
+        return {user: new UserDto(user)}
+    }
+
     async removeUni(id, universities) {
         const user = await UserModel.findOne({_id: id})
         if (!user) {
