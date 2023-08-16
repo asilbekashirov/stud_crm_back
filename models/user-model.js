@@ -30,6 +30,8 @@ const UserSchema = new Schema(
       type: String,
       default: "user",
     },
+    selectedUniversities: [{type: String}],
+    appliedUniversities: [{type: String}]
   },
   { timestamps: true }
 );

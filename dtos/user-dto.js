@@ -5,6 +5,8 @@ module.exports = class UserDto {
     fullName;
     birthday;
     role;
+    selectedUniversities = []
+    appliedUniversities = []
 
     constructor(model) {
         this.email = model.email;
@@ -13,5 +15,7 @@ module.exports = class UserDto {
         this.birthday = model.birthday;
         this.fullName = model.fullName;
         this.role = model.role;
+        this.selectedUniversities = model.selectedUniversities;
+        this.appliedUniversities = model.appliedUniversities;
     }
 }

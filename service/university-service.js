@@ -22,7 +22,7 @@ class UniversityService {
     const baseUniversity = Object.assign({}, data);
 
     delete baseUniversity.bachelors;
-    delete baseUniversity.masters;
+    delete baseUniversity.masters; 
     delete baseUniversity.phd;
     
     // save record

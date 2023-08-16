@@ -11,6 +11,8 @@ router.post(
   userController.registration
 );
 router.post("/login", userController.login);
+router.post("/add-university", userController.addUniversity)
+router.delete("/remove-university", userController.removeUniversity)
 router.get("/activate/:link", userController.activate);
 router.get("/users", authMiddleware, userController.getUsers);
 router.put("/user/:id/update", authMiddleware, userController.updateUser)

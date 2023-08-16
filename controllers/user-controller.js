@@ -3,6 +3,31 @@ const {validationResult} = require('express-validator')
 const ApiError = require('../exceptions/api-error')
 
 class UserController {
+
+    async addUniversity(req, res, next) {
+        try {
+            
+            const {id, universities} = req.body
+
+            const user = await userService.addUni(id, universities)
+            return res.status(200).json(user)
+        } catch (error) {
+            console.log(error);
+            next(error)
+        }
+    }
+
+    async removeUniversity(req, res, next) {
+        try {
+            const {id, universities} = req.body
+            const user = await userService.removeUni(id, universities)
+            return res.status(200).json(user)
+        } catch (error) {
+            console.log(error);
+            next(error)
+        }
+    }
+
     async registration(req, res, next) {
         try {
             const errors = validationResult(req)
