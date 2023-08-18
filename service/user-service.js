@@ -8,13 +8,12 @@ const UserDto = require('../dtos/user-dto')
 
 class UserService {
 
-    async addUni(id, universities) {
+    async addUni(id, university) {
         const user = await UserModel.findOne({_id: id})
         if (!user) {
             throw ApiError.BadRequest('USER_NOT_FOUND')
         }
-
-        user.selectedUniversities.push(...universities)
+        user.selectedUniversities.push(university)
         await user.save()
 
         return {user: new UserDto(user)}

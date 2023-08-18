@@ -11,6 +11,14 @@ class AnalyticsService {
 
         return {totalUsers, totalUniversities, countriesAndCounts}
     }
+
+    async getCountries() {
+        const countriesAndCounts = await countryModel.find()
+
+        const countries = countriesAndCounts.map(country => country.country)
+
+        return countries
+    }
 }
 
 module.exports = new AnalyticsService();

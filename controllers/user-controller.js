@@ -8,9 +8,9 @@ class UserController {
         try {
             
             const {id} = req.params
-            const {universities} = req.body
+            const university = req.body
 
-            const user = await userService.addUni(id, universities)
+            const user = await userService.addUni(id, university)
             return res.status(200).json(user)
         } catch (error) {
             console.log(error);

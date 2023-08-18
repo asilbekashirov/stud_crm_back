@@ -9,5 +9,10 @@ router.get(
   [authMiddleware, roleMiddleware(["admin"])],
   analyticsController.getAnalytics
 );
+router.get(
+  "/countries",
+  analyticsController.getCountries
+)
+
 
 module.exports = router;
