@@ -13,7 +13,7 @@ router.post(
 );
 router.get("/user/:id", authMiddleware, userController.getUserProfile)
 router.post("/login", userController.login);
-router.post("/add-university", userController.addUniversity)
+router.post("/user/:id/add-university", userController.addUniversity)
 router.delete("/remove-university", userController.removeUniversity)
 router.get("/activate/:link", userController.activate);
 router.get("/users", [authMiddleware, roleMiddleware(["admin"])], userController.getUsers);

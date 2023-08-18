@@ -7,7 +7,8 @@ class UserController {
     async addUniversity(req, res, next) {
         try {
             
-            const {id, universities} = req.body
+            const {id} = req.params
+            const {universities} = req.body
 
             const user = await userService.addUni(id, universities)
             return res.status(200).json(user)

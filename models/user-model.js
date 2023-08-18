@@ -30,7 +30,18 @@ const UserSchema = new Schema(
       type: String,
       default: "user",
     },
-    selectedUniversities: [{type: String}],
+    selectedUniversities: [
+      {
+        name: {
+          ru: { type: String},
+          uz: { type: String},
+          en: { type: String},
+        },
+        id: { type: String },
+        city: { type: String },
+        country: { type: String }
+      }
+    ],
     appliedUniversities: [{type: String}]
   },
   { timestamps: true }
