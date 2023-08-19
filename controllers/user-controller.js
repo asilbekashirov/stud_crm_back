@@ -31,8 +31,9 @@ class UserController {
 
     async removeUniversity(req, res, next) {
         try {
-            const {id, universities} = req.body
-            const user = await userService.removeUni(id, universities)
+            const {id} = req.params
+            const universityId = req.body
+            const user = await userService.removeUni(id, universityId)
             return res.status(200).json(user)
         } catch (error) {
             console.log(error);

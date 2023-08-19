@@ -28,13 +28,13 @@ class UserService {
         return {user: new UserDto(user)}
     }
 
-    async removeUni(id, universities) {
+    async removeUni(id, universityId) {
         const user = await UserModel.findOne({_id: id})
         if (!user) {
             throw ApiError.BadRequest('USER_NOT_FOUND')
         }
-
-        user.selectedUniversities = user.selectedUniversities.filter(u => !universities.includes(u))
+        console.log(universityId);
+        user.selectedUniversities = user.selectedUniversities.filter(u => u._id === universityId)
         await user.save()
 
         return {user: new UserDto(user)}
