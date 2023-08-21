@@ -6,7 +6,7 @@ const router = require("./router/index");
 const errorMiddleware = require("./middleware/error-middleware");
 const expressFileUpload = require("express-fileupload");
 const bodyParser = require("body-parser");
-const fs = require("fs");
+const {checkFolders} = require("./utils/folder-utils");
 require("dotenv").config();
 
 const app = express();
@@ -23,28 +23,12 @@ app.use("/api", router);
 app.use(errorMiddleware);
 app.use(expressFileUpload());
 
-const checkFolders = () => {
-
-  if (fs.existsSync("./media")) return
-
-  fs.mkdirSync("./media");
-
-  const folders = ["users", "university"];
-
-  folders.forEach(name => {
-    if (!fs.existsSync(`./media/${name}`)) {
-      fs.mkdirSync(`./media/${name}`);
-    }
-  })
-}
-
 const start = async () => {
   try {
     checkFolders()
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-    //   strictPopulate: false
     });
     app.listen(PORT, () => {
       console.log(
