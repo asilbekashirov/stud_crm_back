@@ -91,11 +91,8 @@ class UniversityService {
     }
   }
 
-  async getUniversities() {
-    return await universityModel.find()
-        .populate({path: 'bachelors'})
-        .populate({path: 'masters'})
-        .populate({ path: 'phd'})
+  async getUniversities(page = 1, limit = 10) {
+    return await universityModel.paginate({}, {page, limit, populate: ["bachelors", "masters", "phd"]})
   }
 
   async update(id, rest) {

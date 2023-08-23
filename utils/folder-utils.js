@@ -15,9 +15,9 @@ const checkFolders = () => {
 };
 
 const createFolder = (name) => {
-    if (fs.existsSync(`./media/users/${name}`)) return;
+  if (fs.existsSync(`./media/users/${name}`)) return;
 
-    fs.mkdirSync(`./media/users/${name}`);
-}
+  fs.mkdirSync(`./media/users/${name}`);
+};
 
-module.exports = {checkFolders, createFolder};
+module.exports = { checkFolders, createFolder };

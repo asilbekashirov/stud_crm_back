@@ -20,7 +20,8 @@ class UniversityController {
 
     async getUniversities(req, res, next) {
         try {
-            const universities = await universityService.getUniversities()
+            const {page, limit} = req.query
+            const universities = await universityService.getUniversities(page, limit)
 
             return res.json(universities)
         } catch (error) {

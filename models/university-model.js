@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const UniversitySchema = Schema(
   {
@@ -10,6 +11,7 @@ const UniversitySchema = Schema(
     foundIn: { type: String },
     country: { type: String, required: true },
     city: { type: String, required: true },
+    fee: { type: Number },
     description: {
       ru: { type: String },
       en: { type: String },
@@ -37,5 +39,7 @@ const UniversitySchema = Schema(
   },
   { timestamps: true }
 );
+
+UniversitySchema.plugin(mongoosePaginate);
 
 module.exports = model("University", UniversitySchema);
