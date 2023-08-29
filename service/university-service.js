@@ -91,8 +91,22 @@ class UniversityService {
     }
   }
 
-  async getUniversities(page = 1, limit = 10) {
-    return await universityModel.paginate({}, {page, limit, populate: ["bachelors", "masters", "phd"]})
+  async getUniversities(page = 1, limit = 10, country = "") {
+
+    const params = {}
+
+    const checkFields = () => {
+      const paramsArr = [country]
+      if (!Array.isArray(paramsArr)) return
+      [country].map(item => {
+        if (!item) return
+        params[item] = item
+      })
+    }
+    checkFields()
+
+    console.log(params);
+    return await universityModel.paginate(params, {page, limit, populate: ["bachelors", "masters", "phd"]})
   }
 
   async update(id, rest) {
