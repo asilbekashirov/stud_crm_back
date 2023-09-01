@@ -98,9 +98,9 @@ class UniversityService {
     const checkFields = () => {
       const paramsArr = [country]
       if (!Array.isArray(paramsArr)) return
-      [country].map(item => {
-        if (!item) return
-        params[item] = item
+      [{key: 'country', value: country}].map(item => {
+        if (!item.value) return
+        params[item.key] = item.value
       })
     }
     checkFields()
