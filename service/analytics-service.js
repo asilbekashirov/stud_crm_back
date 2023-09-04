@@ -5,11 +5,12 @@ const userModel = require('../models/user-model');
 class AnalyticsService {
     async getAnalytics() {
         const totalUsers = await userModel.countDocuments({ role: "user" })
+        const totalAdmins = await userModel.countDocuments({ role: "admin" })
         const totalUniversities = await universityModel.countDocuments()
 
         const countriesAndCounts = await countryModel.find()
 
-        return {totalUsers, totalUniversities, countriesAndCounts}
+        return {totalUsers, totalUniversities, countriesAndCounts, totalAdmins}
     }
 
     async getCountries() {
